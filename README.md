@@ -1,3 +1,9 @@
+### Links
+- [Docker hub](https://hub.docker.com/r/dassader/hass-telegram-bot)
+- [Get chat id](https://t.me/getidsbot)
+- [Bot Father](https://t.me/BotFather)
+
+
 # Deploy
 ### Create config file
 
