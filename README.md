@@ -30,3 +30,38 @@ telegram:
 ```bash
 > docker stack deploy --compose-file=docker-compose.yaml YOUR_STACK_NAME
 ```
+
+### Add action to Home Assistant
+
+```yaml
+rest_command:
+  send_open_shopping_list_notification:
+    method: POST
+    url: 'http://192.168.1.1:8080/message'
+    content_type: "application/json"
+    payload: '{
+                "userList": ["{{ user }}"],
+                "message": "🛍 Хочешь посмотреть список покупок?",
+                "inlineKeyboard": [[
+                  {
+                    "text": "Открывай 👍🏻",
+                    "data": "/shopping_list"
+                  }
+                ]]
+              }'
+```
+
+### Call action from authomation when phone near shop
+
+```yaml
+alias: '[Hallway] Send notification when Andrii come shop'
+trigger:
+  - platform: state
+    entity_id: input_boolean.andrii_near_shop
+    from: 'off'
+    to: 'on'
+action:
+  - service: rest_command.send_open_shopping_list_notification
+    data:
+      user: "andrii"
+```
