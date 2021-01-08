@@ -1,0 +1,25 @@
+version: '3.4'
+services:
+  telegram-bot:
+    image: dassader/hass-telegram-bot
+    restart: always
+    configs:
+      - source: telegram.yaml
+        target: /bot/storage/telegram.yaml
+    volumes:
+      - hass-telegram-bot:/bot/storage
+    ports:
+      - published: 8080
+        target: 8080
+        protocol: tcp
+        mode: host
+    deploy:
+      mode: global
+
+configs:
+  telegram.yaml:
+    external: true
+
+volumes:
+  hass-telegram-bot:
+    external: true
