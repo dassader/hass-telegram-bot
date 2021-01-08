@@ -10,6 +10,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
@@ -143,5 +144,18 @@ public class MessageService {
         messagePayload.setMessage(message);
         messagePayload.setUserList(new ArrayList<>(telegramProperties.getBotChats().keySet()));
         sendMessage(messagePayload);
+    }
+
+    public void deleteMessage(String user, Integer messageId) {
+        DeleteMessage deleteMessage = DeleteMessage.builder()
+                .chatId(getChatId(user))
+                .messageId(messageId)
+                .build();
+
+        try {
+            telegramBot.execute(deleteMessage);
+        } catch (TelegramApiException e) {
+            log.error("Error while delete message", e);
+        }
     }
 }

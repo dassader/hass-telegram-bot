@@ -36,7 +36,7 @@ public abstract class AbstractUpdateListener {
         }
     }
 
-    protected boolean parseCallback(Update update) {
+    private boolean parseCallback(Update update) {
         Optional<CallbackQuery> callbackContainer = Optional.of(update)
                 .map(Update::getCallbackQuery);
 
@@ -57,7 +57,7 @@ public abstract class AbstractUpdateListener {
         return true;
     }
 
-    protected boolean parseMessage(Update update) {
+    private boolean parseMessage(Update update) {
         Optional<Message> messageContainer = Optional.of(update)
                 .map(Update::getMessage);
 

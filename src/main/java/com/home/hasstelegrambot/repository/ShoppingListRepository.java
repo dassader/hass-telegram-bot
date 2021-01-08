@@ -9,4 +9,5 @@ public interface ShoppingListRepository extends CrudRepository<ShoppingListEntit
     Iterable<ShoppingListEntity> findAllByCheckedIsTrue();
     Iterable<ShoppingListEntity> findAllByCheckedIsFalse();
     void deleteByCheckedIsTrue();
+    int countAllByCheckedIsFalse();
 }

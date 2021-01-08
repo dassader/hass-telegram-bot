@@ -71,4 +71,8 @@ public class ShoppingListService {
     public void removeAll() {
         shoppingListRepository.deleteAll();
     }
+
+    public int getCountActiveItems() {
+        return shoppingListRepository.countAllByCheckedIsFalse();
+    }
 }
