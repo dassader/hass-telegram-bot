@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-  telegram-bot:
+  hass-telegram-bot:
     image: dassader/hass-telegram-bot
     restart: always
     configs:
@@ -8,6 +8,7 @@ services:
         target: /bot/storage/telegram.yaml
     volumes:
       - hass-telegram-bot:/bot/storage
+      - /mnt/data/supervisor/homeassistant:/config
     ports:
       - published: 8080
         target: 8080
