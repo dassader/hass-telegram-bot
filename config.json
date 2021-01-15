@@ -1,0 +1,22 @@
+{
+  "name": "Hass Telegram bot",
+  "version": "1",
+  "slug": "hass_telegram_bot",
+  "description": "Bot with shopping list",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "startup": "application",
+  "boot": "auto",
+  "options": {
+    "token": "",
+    "username": "",
+    "userList": []
+  },
+  "schema": {
+    "token": "str",
+    "username": "str",
+    "logins": [{ "username": "str", "chatId": "str" }]
+  },
+  "ports": {
+    "8080/tcp": 8080
+  }
+}

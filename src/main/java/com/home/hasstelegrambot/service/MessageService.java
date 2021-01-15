@@ -62,7 +62,9 @@ public class MessageService {
         for (String path : imagePathList) {
             File file = new File(path);
             if (file.isDirectory()) {
-                List<File> files = Arrays.stream(file.listFiles()).filter(File::isFile).collect(Collectors.toList());
+                List<File> files = Arrays.stream(file.listFiles())
+                        .filter(File::isFile)
+                        .collect(Collectors.toList());
                 result.addAll(files);
             } else {
                 result.add(file);

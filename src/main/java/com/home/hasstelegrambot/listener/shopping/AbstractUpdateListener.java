@@ -40,7 +40,7 @@ public abstract class AbstractUpdateListener {
         Optional<CallbackQuery> callbackContainer = Optional.of(update)
                 .map(Update::getCallbackQuery);
 
-        if (callbackContainer.isEmpty()) {
+        if (!callbackContainer.isPresent()) {
             return false;
         }
 
@@ -61,7 +61,7 @@ public abstract class AbstractUpdateListener {
         Optional<Message> messageContainer = Optional.of(update)
                 .map(Update::getMessage);
 
-        if (messageContainer.isEmpty()) {
+        if (!messageContainer.isPresent()) {
             return false;
         }
 
