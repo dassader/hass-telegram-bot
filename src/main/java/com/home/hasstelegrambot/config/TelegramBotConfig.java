@@ -15,14 +15,10 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 @Log4j2
 @Configuration
 public class TelegramBotConfig {
-
-
-
     @Bean
     public TelegramBotsApi botsApi(LongPollingBot longPollingBot) {
         try {
@@ -43,9 +39,15 @@ public class TelegramBotConfig {
         return new TelegramBot(properties.getLogin(), properties.getToken(), eventPublisher);
     }
 
+
     @Bean
-    public TelegramBotProperties telegramBotProperties(ObjectMapper objectMapper, ResourceLoader resourceLoader) throws IOException {
+    public TelegramBotProperties telegramBotProperties(ApplicationProperties properties) {
+        return properties.getTelegram();
+    }
+
+    @Bean
+    public ApplicationProperties applicationProperties(ObjectMapper objectMapper, ResourceLoader resourceLoader) throws IOException {
         File file = resourceLoader.getResource("file:./data/options.json").getFile();
-        return objectMapper.readValue(file, TelegramBotProperties.class);
+        return objectMapper.readValue(file, ApplicationProperties.class);
     }
 }

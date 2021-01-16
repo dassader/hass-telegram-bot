@@ -2,7 +2,7 @@ package com.home.hasstelegrambot.auth;
 
 import com.home.hasstelegrambot.bot.TelegramBotUpdateEvent;
 import com.home.hasstelegrambot.config.TelegramBotProperties;
-import com.home.hasstelegrambot.config.UsersProperties;
+import com.home.hasstelegrambot.config.TelegramUsersProperties;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
@@ -24,7 +24,7 @@ public class AuthorizationTelegramBotUpdateListener {
     public AuthorizationTelegramBotUpdateListener(ApplicationEventPublisher eventPublisher, TelegramBotProperties telegramBotProperties) {
         this.eventPublisher = eventPublisher;
 
-        for (UsersProperties user : telegramBotProperties.getUsers()) {
+        for (TelegramUsersProperties user : telegramBotProperties.getUsers()) {
             userList.add(user.getChatId());
         }
     }

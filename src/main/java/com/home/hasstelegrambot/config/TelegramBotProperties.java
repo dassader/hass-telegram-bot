@@ -9,5 +9,5 @@ import java.util.List;
 public class TelegramBotProperties {
     private String login;
     private String token;
-    private List<UsersProperties> users = new ArrayList<>();
+    private List<TelegramUsersProperties> users = new ArrayList<>();
 }

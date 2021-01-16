@@ -14,26 +14,29 @@
   "boot": "auto",
   "host_network": true,
   "options": {
-    "login": "",
-    "token": "",
-    "users": [
-      {
-        "username": "",
-        "chatId": ""
-      }
-    ]
+    "port": 8574,
+    "telegram": {
+      "login": "",
+      "token": "",
+      "users": [
+        {
+          "username": "",
+          "chatId": ""
+        }
+      ]
+    }
   },
   "schema": {
-    "users": [
-      {
-        "username": "str",
-        "chatId": "str"
-      }
-    ],
-    "login": "str",
-    "token": "str"
-  },
-  "ports": {
-    "8080/tcp": 8080
+    "port": "int",
+    "telegram": {
+      "users": [
+        {
+          "username": "str",
+          "chatId": "str"
+        }
+      ],
+      "login": "str",
+      "token": "str"
+    }
   }
 }

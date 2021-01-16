@@ -2,9 +2,8 @@ package com.home.hasstelegrambot.listener.shopping;
 
 import com.google.common.base.Function;
 import com.home.hasstelegrambot.config.TelegramBotProperties;
-import com.home.hasstelegrambot.config.UsersProperties;
+import com.home.hasstelegrambot.config.TelegramUsersProperties;
 import com.home.hasstelegrambot.service.MessageService;
-import org.checkerframework.checker.initialization.qual.Initialized;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -27,7 +26,7 @@ public abstract class AbstractUpdateListener implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        for (UsersProperties user : telegramProperties.getUsers()) {
+        for (TelegramUsersProperties user : telegramProperties.getUsers()) {
             userMap.put(user.getChatId(), user.getUsername());
         }
     }
