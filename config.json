@@ -12,7 +12,7 @@
   ],
   "startup": "application",
   "boot": "auto",
-  "image": "homeassistant/{arch}-addon-telegram-shopping-bot",
+  "image": "dassader/{arch}-addon-telegram-shopping-bot",
   "map": [
     "config:rw"
   ],
