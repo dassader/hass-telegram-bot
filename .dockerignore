@@ -1,6 +1,10 @@
 storage
 target
+.git
+.idea
 .gitignore
 docker-compose.yaml
 Dockerfile
 README.md
+
+data

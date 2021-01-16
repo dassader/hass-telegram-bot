@@ -12,7 +12,7 @@ import org.springframework.context.annotation.PropertySources;
 @Configuration
 @ConfigurationProperties(prefix = "telegram")
 @PropertySources({
-        @PropertySource(value = "file:./storage/telegram.yaml", factory = YamlPropertySourceFactory.class)
+        @PropertySource(value = "file:./data/options.json", factory = YamlPropertySourceFactory.class)
 })
 public class TelegramBotProperties {
     private String botLogin;
