@@ -45,7 +45,7 @@ public class TelegramBotConfig {
 
     @Bean
     public TelegramBotProperties telegramBotProperties(ObjectMapper objectMapper, ResourceLoader resourceLoader) throws IOException {
-        File file = resourceLoader.getResource("file:./data/configprops.json").getFile();
+        File file = resourceLoader.getResource("file:./data/options.json").getFile();
         return objectMapper.readValue(file, TelegramBotProperties.class);
     }
 }
