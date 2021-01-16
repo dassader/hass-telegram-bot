@@ -5,4 +5,4 @@ RUN ./gradlew --parallel --no-daemon assemble \
 && cp /build/build/libs/app.jar /app.jar \
 && rm -rf /build
 WORKDIR /
-CMD ["bash"]
+CMD ["java", "-jar", "app.jar"]
