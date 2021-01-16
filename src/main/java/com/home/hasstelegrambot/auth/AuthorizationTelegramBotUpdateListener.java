@@ -2,8 +2,8 @@ package com.home.hasstelegrambot.auth;
 
 import com.home.hasstelegrambot.bot.TelegramBotUpdateEvent;
 import com.home.hasstelegrambot.config.TelegramBotProperties;
+import com.home.hasstelegrambot.config.UsersProperties;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -11,17 +11,23 @@ import org.telegram.abilitybots.api.util.AbilityUtils;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 @Log4j2
 @Component
 public class AuthorizationTelegramBotUpdateListener {
 
-    @Autowired
     private ApplicationEventPublisher eventPublisher;
+    private List<String> userList = new ArrayList<>();
 
-    @Autowired
-    private TelegramBotProperties telegramBotProperties;
+    public AuthorizationTelegramBotUpdateListener(ApplicationEventPublisher eventPublisher, TelegramBotProperties telegramBotProperties) {
+        this.eventPublisher = eventPublisher;
+
+        for (UsersProperties user : telegramBotProperties.getUsers()) {
+            userList.add(user.getChatId());
+        }
+    }
 
     @EventListener
     public void handleContextStart(TelegramBotUpdateEvent telegramBotUpdateEvent) {
@@ -29,13 +35,11 @@ public class AuthorizationTelegramBotUpdateListener {
 
         Long chatId = AbilityUtils.getChatId(update);
 
-        Collection<String> listChats = telegramBotProperties.getBotChats().values();
-
-        if (listChats.contains(String.valueOf(chatId))) {
+        if (userList.contains(String.valueOf(chatId))) {
             eventPublisher.publishEvent(update);
         } else {
             User user = AbilityUtils.getUser(update);
-            log.warn("Unauthorized message from {}", user.getUserName());
+            log.warn("Unauthorized message from {} with chat id: {}", user.getUserName(), user.getId());
         }
     }
 }

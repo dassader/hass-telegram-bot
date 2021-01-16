@@ -3,17 +3,34 @@
   "version": "1",
   "slug": "hass_telegram_bot",
   "description": "Bot with shopping list",
-  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
   "startup": "application",
   "boot": "auto",
   "options": {
+    "login": "",
     "token": "",
-    "username": "",
-    "userList": []
+    "users": [
+      {
+        "username": "",
+        "chatId": ""
+      }
+    ]
   },
   "schema": {
-    "token": "str",
-    "username": "str"
+    "users": [
+      {
+        "username": "str",
+        "chatId": "str"
+      }
+    ],
+    "login": "str",
+    "token": "str"
   },
   "ports": {
     "8080/tcp": 8080

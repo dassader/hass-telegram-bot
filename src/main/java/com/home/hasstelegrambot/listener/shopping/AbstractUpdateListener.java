@@ -2,7 +2,10 @@ package com.home.hasstelegrambot.listener.shopping;
 
 import com.google.common.base.Function;
 import com.home.hasstelegrambot.config.TelegramBotProperties;
+import com.home.hasstelegrambot.config.UsersProperties;
 import com.home.hasstelegrambot.service.MessageService;
+import org.checkerframework.checker.initialization.qual.Initialized;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.telegram.abilitybots.api.util.AbilityUtils;
@@ -10,17 +13,24 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-public abstract class AbstractUpdateListener {
+public abstract class AbstractUpdateListener implements InitializingBean {
 
     @Autowired
     private TelegramBotProperties telegramProperties;
 
     @Autowired
     protected MessageService messageService;
+
+    private Map<String, String> userMap = new HashMap<>();
+
+    @Override
+    public void afterPropertiesSet() {
+        for (UsersProperties user : telegramProperties.getUsers()) {
+            userMap.put(user.getChatId(), user.getUsername());
+        }
+    }
 
     @EventListener
     public void handleTelegramUpdate(Update update) {
@@ -88,6 +98,6 @@ public abstract class AbstractUpdateListener {
 
     private String getUser(Update update) {
         String userId = String.valueOf(AbilityUtils.getUser(update).getId());
-        return telegramProperties.getBotChats().inverseBidiMap().get(userId);
+        return userMap.get(userId);
     }
 }

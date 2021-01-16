@@ -1,6 +1,7 @@
 package com.home.hasstelegrambot.service;
 
 import com.home.hasstelegrambot.config.TelegramBotProperties;
+import com.home.hasstelegrambot.config.UsersProperties;
 import com.home.hasstelegrambot.controller.dto.InlineKeyboardKey;
 import com.home.hasstelegrambot.controller.dto.MessagePayload;
 import lombok.extern.log4j.Log4j2;
@@ -137,14 +138,24 @@ public class MessageService {
     }
 
     private String getChatId(String user) {
-        Map<String, String> chats = telegramProperties.getBotChats();
-        return chats.get(user);
+        for (UsersProperties userProperties : telegramProperties.getUsers()) {
+            if (user.equals(userProperties.getUsername())) {
+                return userProperties.getChatId();
+            }
+        }
+
+        return null;
     }
 
     public void notifyAll(String message) {
         MessagePayload messagePayload = new MessagePayload();
         messagePayload.setMessage(message);
-        messagePayload.setUserList(new ArrayList<>(telegramProperties.getBotChats().keySet()));
+
+        List<String> userIdList = telegramProperties.getUsers()
+                .stream().map(UsersProperties::getChatId)
+                .collect(Collectors.toList());
+
+        messagePayload.setUserList(userIdList);
         sendMessage(messagePayload);
     }
 
