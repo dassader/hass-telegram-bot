@@ -12,7 +12,6 @@
   ],
   "startup": "application",
   "boot": "auto",
-  "image": "dassader/{arch}-addon-telegram-shopping-bot",
   "map": [
     "config:rw"
   ],
