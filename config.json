@@ -1,5 +1,5 @@
 {
-  "name": "Hass Telegram bot",
+  "name": "Telegram shopping bot",
   "version": "1",
   "slug": "hass_telegram_bot",
   "description": "Bot with shopping list",
