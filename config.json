@@ -13,8 +13,7 @@
   },
   "schema": {
     "token": "str",
-    "username": "str",
-    "logins": [{ "username": "str", "chatId": "str" }]
+    "username": "str"
   },
   "ports": {
     "8080/tcp": 8080
