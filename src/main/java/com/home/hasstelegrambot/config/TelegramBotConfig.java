@@ -31,7 +31,7 @@ public class TelegramBotConfig {
     }
 
     @Bean
-    public TelegramLongPollingBot telegramBot(TelegramBotProperties properties, ApplicationEventPublisher eventPublisher) {
+    public TelegramLongPollingBot telegramBot(CustomApplicationProperties properties, ApplicationEventPublisher eventPublisher) {
         if (properties.getToken() == null) {
             throw new IllegalArgumentException("Bot token not found");
         }
@@ -39,15 +39,9 @@ public class TelegramBotConfig {
         return new TelegramBot(properties.getLogin(), properties.getToken(), eventPublisher);
     }
 
-
     @Bean
-    public TelegramBotProperties telegramBotProperties(ApplicationProperties properties) {
-        return properties.getTelegram();
-    }
-
-    @Bean
-    public ApplicationProperties applicationProperties(ObjectMapper objectMapper, ResourceLoader resourceLoader) throws IOException {
+    public CustomApplicationProperties applicationProperties(ObjectMapper objectMapper, ResourceLoader resourceLoader) throws IOException {
         File file = resourceLoader.getResource("file:./data/options.json").getFile();
-        return objectMapper.readValue(file, ApplicationProperties.class);
+        return objectMapper.readValue(file, CustomApplicationProperties.class);
     }
 }

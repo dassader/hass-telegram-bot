@@ -1,7 +1,7 @@
 package com.home.hasstelegrambot.service;
 
-import com.home.hasstelegrambot.config.TelegramBotProperties;
-import com.home.hasstelegrambot.config.TelegramUsersProperties;
+import com.home.hasstelegrambot.config.CustomApplicationProperties;
+import com.home.hasstelegrambot.config.TelegramUserListProperties;
 import com.home.hasstelegrambot.controller.dto.InlineKeyboardKey;
 import com.home.hasstelegrambot.controller.dto.MessagePayload;
 import lombok.extern.log4j.Log4j2;
@@ -31,7 +31,7 @@ public class MessageService {
     private TelegramLongPollingBot telegramBot;
 
     @Autowired
-    private TelegramBotProperties telegramProperties;
+    private CustomApplicationProperties properties;
 
     public void sendImages(MessagePayload payload) {
         List<InputMedia> inputMedia = new ArrayList<>();
@@ -138,7 +138,7 @@ public class MessageService {
     }
 
     private String getChatId(String user) {
-        for (TelegramUsersProperties userProperties : telegramProperties.getUsers()) {
+        for (TelegramUserListProperties userProperties : properties.getUsers()) {
             if (user.equals(userProperties.getUsername())) {
                 return userProperties.getChatId();
             }
@@ -151,8 +151,8 @@ public class MessageService {
         MessagePayload messagePayload = new MessagePayload();
         messagePayload.setMessage(message);
 
-        List<String> userIdList = telegramProperties.getUsers()
-                .stream().map(TelegramUsersProperties::getUsername)
+        List<String> userIdList = properties.getUsers()
+                .stream().map(TelegramUserListProperties::getUsername)
                 .collect(Collectors.toList());
 
         messagePayload.setUserList(userIdList);

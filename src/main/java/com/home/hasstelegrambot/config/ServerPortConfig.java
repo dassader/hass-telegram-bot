@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class ServerPortConfig implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
 
     @Autowired
-    private ApplicationProperties properties;
+    private CustomApplicationProperties properties;
 
     @Override
     public void customize(ConfigurableWebServerFactory factory) {

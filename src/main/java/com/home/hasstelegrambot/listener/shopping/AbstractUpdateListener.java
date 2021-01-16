@@ -1,8 +1,8 @@
 package com.home.hasstelegrambot.listener.shopping;
 
 import com.google.common.base.Function;
-import com.home.hasstelegrambot.config.TelegramBotProperties;
-import com.home.hasstelegrambot.config.TelegramUsersProperties;
+import com.home.hasstelegrambot.config.CustomApplicationProperties;
+import com.home.hasstelegrambot.config.TelegramUserListProperties;
 import com.home.hasstelegrambot.service.MessageService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.*;
 public abstract class AbstractUpdateListener implements InitializingBean {
 
     @Autowired
-    private TelegramBotProperties telegramProperties;
+    private CustomApplicationProperties properties;
 
     @Autowired
     protected MessageService messageService;
@@ -26,7 +26,7 @@ public abstract class AbstractUpdateListener implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        for (TelegramUsersProperties user : telegramProperties.getUsers()) {
+        for (TelegramUserListProperties user : properties.getUsers()) {
             userMap.put(user.getChatId(), user.getUsername());
         }
     }

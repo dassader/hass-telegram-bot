@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class TelegramBotProperties {
+public class CustomApplicationProperties {
+    private int port;
     private String login;
     private String token;
-    private List<TelegramUsersProperties> users = new ArrayList<>();
+    private List<TelegramUserListProperties> users = new ArrayList<>();
 }

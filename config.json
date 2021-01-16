@@ -15,23 +15,24 @@
   "host_network": true,
   "options": {
     "port": 8574,
-    "telegram": {
-      "login": "",
-      "token": "",
-      "users": [
-        {
-          "username": "",
-          "chatId": ""
-        }
-      ]
-    }
+    "login": "",
+    "token": "",
+    "users": [
+      {
+        "username": "",
+        "chatId": ""
+      }
+    ]
   },
   "schema": {
     "port": "int",
-    "telegram": {
-      "users": ["match(.+)"],
-      "login": "str",
-      "token": "str"
-    }
+    "login": "str",
+    "token": "str",
+    "users": [
+      {
+        "username": "str",
+        "chatId": "str"
+      }
+    ]
   }
 }
