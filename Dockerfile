@@ -1,4 +1,5 @@
-FROM balenalib/raspberry-pi-openjdk:8-stretch
+ARG BUILD_FROM
+FROM $BUILD_FROM
 WORKDIR /build
 COPY . ./
 RUN ./gradlew --parallel --no-daemon assemble \

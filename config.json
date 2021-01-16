@@ -1,6 +1,6 @@
 {
   "name": "Telegram shopping bot",
-  "version": "1",
+  "version": "2",
   "slug": "hass_telegram_bot",
   "description": "Bot with shopping list",
   "arch": [
@@ -12,6 +12,8 @@
   ],
   "startup": "application",
   "boot": "auto",
+  "discovery": ["shopping-bot"],
+  "image": "homeassistant/{arch}-addon-telegram-shopping-bot",
   "map": [
     "config:rw"
   ],
