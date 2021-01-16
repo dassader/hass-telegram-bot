@@ -1,6 +1,6 @@
 {
   "name": "Telegram shopping bot",
-  "version": "2",
+  "version": "3",
   "slug": "hass_telegram_bot",
   "description": "Bot with shopping list",
   "arch": [
