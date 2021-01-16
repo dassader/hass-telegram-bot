@@ -1,7 +1,0 @@
-{
-  "build_from": {
-    "aarch64": "balenalib/raspberry-pi-openjdk:8-stretch",
-    "amd64": "openjdk:8",
-    "armhf": "balenalib/raspberry-pi-openjdk:8-stretch"
-  }
-}
