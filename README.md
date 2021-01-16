@@ -1,41 +1,22 @@
 ### Links
-- [Docker hub](https://hub.docker.com/r/dassader/hass-telegram-bot)
 - [Get chat id](https://t.me/getidsbot)
 - [Bot Father](https://t.me/BotFather)
 
 
-# Deploy
-### Create config file
+# Usage
+### Config example
 
 ```yaml
-telegram:
-  bot-login: 'YOUR_BOT_LOGIN'
-  bot-token: 'YOUR_BOT_TOKEN'
-  bot-chats:
-    'YOUR_USERNAME': 'YOUR_CHAR_ID'
+login: 'shopping_list_bot'
+token: '6040231338:ACGS96Ql4bK6SoQ7024J8_FGdSX_sxshZvc'
+users:
+    - username: 'andrii'
+      chatId: '223714846' 
 ```
 
 > Field "YOUR_USERNAME" need to send messages by REST api
 
 > You can get "YOUR_CHAR_ID" from telegram bot https://t.me/getidsbot 
-
-### Create docker config
-
-```bash
-> docker config create telegram.yaml YOUR_FILE_NAME
-```
-
-### Create docker volume to store database
-
-```bash
-> docker volume create --name=hass-telegram-bot
-```
-
-### Deploy stack to docker swarm
-
-```bash
-> docker stack deploy --compose-file=docker-compose.yaml YOUR_STACK_NAME
-```
 
 ### Add action to Home Assistant
 

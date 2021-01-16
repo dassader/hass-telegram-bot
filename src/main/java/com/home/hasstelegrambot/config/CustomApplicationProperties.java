@@ -7,7 +7,6 @@ import java.util.List;
 
 @Data
 public class CustomApplicationProperties {
-    private int port;
     private String login;
     private String token;
     private List<TelegramUserListProperties> users = new ArrayList<>();
