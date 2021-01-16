@@ -29,7 +29,7 @@
   "schema": {
     "port": "int",
     "telegram": {
-      "users": "list()?",
+      "users": ["match(.+)"],
       "login": "str",
       "token": "str"
     }
