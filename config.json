@@ -29,12 +29,7 @@
   "schema": {
     "port": "int",
     "telegram": {
-      "users": [
-        {
-          "username": "str",
-          "chatId": "str"
-        }
-      ],
+      "users": "list()?",
       "login": "str",
       "token": "str"
     }
