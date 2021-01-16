@@ -12,7 +12,6 @@
   ],
   "startup": "application",
   "boot": "auto",
-  "discovery": ["hass_telegram_bot"],
   "image": "homeassistant/{arch}-addon-telegram-shopping-bot",
   "map": [
     "config:rw"
