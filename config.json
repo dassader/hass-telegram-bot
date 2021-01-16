@@ -32,7 +32,6 @@
     ]
   },
   "schema": {
-    "port": "int",
     "login": "str",
     "token": "str",
     "users": [
