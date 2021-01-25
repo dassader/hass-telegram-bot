@@ -1,4 +1,4 @@
-package com.home.hasstelegrambot.listener.shopping;
+package com.home.hasstelegrambot.listener;
 
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;

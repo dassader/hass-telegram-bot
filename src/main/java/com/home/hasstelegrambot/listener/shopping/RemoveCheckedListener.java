@@ -1,5 +1,6 @@
 package com.home.hasstelegrambot.listener.shopping;
 
+import com.home.hasstelegrambot.listener.AbstractCommandListener;
 import com.home.hasstelegrambot.service.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

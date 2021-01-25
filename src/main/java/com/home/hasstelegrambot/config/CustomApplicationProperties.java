@@ -9,5 +9,6 @@ import java.util.List;
 public class CustomApplicationProperties {
     private String login;
     private String token;
+    private String webhookUrl;
     private List<TelegramUserListProperties> users = new ArrayList<>();
 }

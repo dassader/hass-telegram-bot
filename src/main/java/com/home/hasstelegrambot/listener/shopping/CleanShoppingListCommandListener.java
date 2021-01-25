@@ -2,7 +2,9 @@ package com.home.hasstelegrambot.listener.shopping;
 
 import com.home.hasstelegrambot.controller.dto.InlineKeyboardKey;
 import com.home.hasstelegrambot.controller.dto.MessagePayload;
+import com.home.hasstelegrambot.listener.AbstractCommandListener;
 import com.home.hasstelegrambot.service.MessageService;
+import com.home.hasstelegrambot.service.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -16,6 +18,12 @@ public class CleanShoppingListCommandListener extends AbstractCommandListener {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private ShoppingListService shoppingListService;
+
+    @Autowired
+    private RemoveCheckedListener removeCheckedListener;
+
     @Override
     protected boolean isSupportCommand(String command) {
         return COMMAND.equals(command);
@@ -23,6 +31,12 @@ public class CleanShoppingListCommandListener extends AbstractCommandListener {
 
     @Override
     protected void handleCommand(Update update, String user, String command) {
+
+        if (shoppingListService.getCountActiveItems() == 0) {
+            removeCheckedListener.handleCommand(update, user, command);
+            return;
+        }
+
         MessagePayload payload = new MessagePayload();
         payload.setMessage("Что именно удалить?");
         payload.setUserList(Arrays.asList(user));

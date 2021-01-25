@@ -2,6 +2,7 @@ package com.home.hasstelegrambot.listener.shopping;
 
 import com.home.hasstelegrambot.controller.dto.InlineKeyboardKey;
 import com.home.hasstelegrambot.controller.dto.MessagePayload;
+import com.home.hasstelegrambot.listener.AbstractUpdateListener;
 import com.home.hasstelegrambot.service.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,5 +1,6 @@
 package com.home.hasstelegrambot.listener.shopping;
 
+import com.home.hasstelegrambot.listener.AbstractUpdateListener;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 

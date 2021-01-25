@@ -1,4 +1,4 @@
-package com.home.hasstelegrambot.listener.shopping;
+package com.home.hasstelegrambot.listener;
 
 import com.google.common.base.Function;
 import com.home.hasstelegrambot.config.CustomApplicationProperties;
