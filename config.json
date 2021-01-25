@@ -1,6 +1,6 @@
 {
   "name": "Telegram shopping bot",
-  "version": "3",
+  "version": "4",
   "slug": "hass_telegram_bot",
   "description": "Bot with shopping list",
   "arch": [
@@ -29,7 +29,8 @@
         "username": "",
         "chatId": ""
       }
-    ]
+    ],
+    "webhookUrl": "http://YOUR_DOMAIN/api/webhook"
   },
   "schema": {
     "login": "str",
@@ -39,6 +40,7 @@
         "username": "str",
         "chatId": "str"
       }
-    ]
+    ],
+    "webhookUrl": "str"
   }
 }
