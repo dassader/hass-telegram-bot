@@ -11,8 +11,10 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -34,25 +36,43 @@ public class MessageService {
     private CustomApplicationProperties properties;
 
     public void sendImages(MessagePayload payload) {
-        List<InputMedia> inputMedia = new ArrayList<>();
-
         List<File> imageFiles = replaceFolderToFilePath(payload.getImageList());
 
-        for (File imageFile : imageFiles) {
-            InputMediaPhoto inputMediaPhoto = new InputMediaPhoto();
-            inputMediaPhoto.setMedia(imageFile, UUID.randomUUID().toString());
-            inputMedia.add(inputMediaPhoto);
+        if(imageFiles.isEmpty()) {
+            return;
         }
 
-        SendMediaGroup group = new SendMediaGroup();
-        group.setMedias(inputMedia);
+        if(imageFiles.size() == 1) {
+            SendPhoto sendPhoto = new SendPhoto();
+            sendPhoto.setCaption(payload.getMessage());
+            sendPhoto.setPhoto(new InputFile(imageFiles.get(0)));
 
-        for (String user : payload.getUserList()) {
-            group.setChatId(getChatId(user));
-            try {
-                telegramBot.execute(group);
-            } catch (TelegramApiException e) {
-                log.error("Error while send message with photos", e);
+            for (String user : payload.getUserList()) {
+                sendPhoto.setChatId(getChatId(user));
+                try {
+                    telegramBot.execute(sendPhoto);
+                } catch (TelegramApiException e) {
+                    log.error("Error while send single photo", e);
+                }
+            }
+        } else {
+            List<InputMedia> inputMedia = new ArrayList<>();
+            for (File imageFile : imageFiles) {
+                InputMediaPhoto inputMediaPhoto = new InputMediaPhoto();
+                inputMediaPhoto.setMedia(imageFile, UUID.randomUUID().toString());
+                inputMedia.add(inputMediaPhoto);
+            }
+
+            SendMediaGroup group = new SendMediaGroup();
+            group.setMedias(inputMedia);
+
+            for (String user : payload.getUserList()) {
+                group.setChatId(getChatId(user));
+                try {
+                    telegramBot.execute(group);
+                } catch (TelegramApiException e) {
+                    log.error("Error while send message with photos", e);
+                }
             }
         }
     }

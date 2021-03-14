@@ -32,6 +32,8 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
     compileOnly 'org.projectlombok:lombok:1.18.16'
 
+    implementation group: 'org.knowm.xchart', name: 'xchart', version: '3.8.0'
+
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
 }
