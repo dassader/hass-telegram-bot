@@ -22,7 +22,7 @@ import static com.home.hasstelegrambot.repository.entity.NumberStatisticType.DAY
 
 @Log4j2
 @Component
-public class CalculateDayTillSalary extends AbstractUpdateListener {
+public class CalculateDayTillSalaryListener extends AbstractUpdateListener {
 
     public static final int SALARY_DAY = 5;
     public static final String RESPONSE_TEMPLATE = "Сегодня %s \n%d дня до %s \n%d/%d = %d";
