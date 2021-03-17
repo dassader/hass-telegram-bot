@@ -5,6 +5,8 @@ import lombok.extern.log4j.Log4j2;
 import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
+import org.knowm.xchart.style.Styler;
+import org.knowm.xchart.style.XYStyler;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -18,6 +20,9 @@ import java.util.Optional;
 @Service
 public class ChartService {
     public static final String CHART_PATH = "/tmp/chart";
+    public static final String DEFAULT = "DEFAULT";
+    public static final double DEFAULT_MAX_VALUE = 2000D;
+    public static final double DEFAULT_MIN_VALUE = 200D;
 
     public Optional<String> generateNumberStatisticChart(Iterable<NumberStatisticEntity> statisticEntities, String title, String seriesName) {
         List<Date> xDataList = new ArrayList<>();
@@ -31,7 +36,45 @@ public class ChartService {
             yDataList.add(statistic.getValue());
         }
 
-        XYChart chart = new XYChartBuilder().width(800).height(600).title(title).build();
+        if (xDataList.isEmpty()) {
+            return Optional.empty();
+        }
+
+        XYChart chart = new XYChartBuilder()
+                .width(800)
+                .height(600)
+                .theme(Styler.ChartTheme.Matlab)
+                .build();
+
+        XYStyler styler = chart.getStyler();
+
+        Double maxValue = yDataList.stream().max(Double::compareTo).get();
+
+        if(maxValue > DEFAULT_MAX_VALUE) {
+            styler.setYAxisMax(maxValue);
+        } else {
+            styler.setYAxisMax(DEFAULT_MAX_VALUE);
+        }
+
+        Double minValue = yDataList.stream().min(Double::compareTo).get();
+
+        if(minValue < DEFAULT_MIN_VALUE) {
+            styler.setYAxisMin(minValue);
+        } else {
+            styler.setYAxisMin(DEFAULT_MIN_VALUE);
+        }
+
+        if(seriesName == null || "".equals(seriesName)) {
+            styler.setLegendVisible(false);
+            seriesName = DEFAULT;
+        }
+
+        if(title == null || "".equals(title)) {
+            styler.setChartTitleVisible(false);
+            title = DEFAULT;
+        }
+
+        chart.setTitle(title);
         chart.addSeries(seriesName, xDataList, yDataList);
 
         try {
@@ -41,5 +84,9 @@ public class ChartService {
             log.error("Error while create chart", e);
             return Optional.empty();
         }
+    }
+
+    public Optional<String> generateNumberStatisticChart(Iterable<NumberStatisticEntity> statisticEntities) {
+        return generateNumberStatisticChart(statisticEntities, null, null);
     }
 }

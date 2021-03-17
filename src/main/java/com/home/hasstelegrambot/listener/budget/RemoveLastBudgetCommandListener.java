@@ -4,7 +4,6 @@ import com.home.hasstelegrambot.controller.dto.MessagePayload;
 import com.home.hasstelegrambot.listener.AbstractCommandListener;
 import com.home.hasstelegrambot.repository.NumberStatisticRepository;
 import com.home.hasstelegrambot.repository.entity.NumberStatisticEntity;
-import com.home.hasstelegrambot.repository.entity.NumberStatisticType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -45,7 +45,7 @@ public class CalculateDayTillSalaryListener extends AbstractUpdateListener {
         Page<NumberStatisticEntity> statisticEntities =
                 statisticRepository.findAllByType(DAY_BUDGET, PageRequest.of(0, 45, Sort.by(Sort.Direction.ASC, "date")));
 
-        chartService.generateNumberStatisticChart(statisticEntities, "История", "Бюджет")
+        chartService.generateNumberStatisticChart(statisticEntities)
                 .ifPresent(payload::addImage);
 
         messageService.sendImages(payload);

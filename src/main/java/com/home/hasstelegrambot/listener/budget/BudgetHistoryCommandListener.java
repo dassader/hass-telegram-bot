@@ -52,7 +52,7 @@ public class BudgetHistoryCommandListener extends AbstractCommandListener {
 
         MessagePayload messagePayload = new MessagePayload(user, responseMessage);
 
-        chartService.generateNumberStatisticChart(statisticList, "История", "Бюджет")
+        chartService.generateNumberStatisticChart(statisticList)
                 .ifPresent(messagePayload::addImage);
 
         messageService.sendImages(messagePayload);
