@@ -23,9 +23,7 @@ public class UpdateWrapper {
 
     public String getTextForce() {
         return getText()
-                .orElseThrow(() -> {
-                   throw new IllegalStateException("Update don't have text");
-                });
+                .orElseThrow(() -> new IllegalStateException("Update don't have text"));
     }
 
     public Optional<Integer> getMessageId() {
@@ -42,9 +40,7 @@ public class UpdateWrapper {
 
     public Integer getMessageIdForce() {
         return getMessageId()
-                .orElseThrow(() -> {
-                    throw new IllegalStateException("Update don't have message id");
-                });
+                .orElseThrow(() -> new IllegalStateException("Update don't have message id"));
     }
 
     public Optional<Message> getMessage() {
