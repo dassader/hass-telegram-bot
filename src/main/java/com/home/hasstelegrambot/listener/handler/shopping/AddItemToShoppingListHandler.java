@@ -1,17 +1,16 @@
-package com.home.hasstelegrambot.listener.shopping;
+package com.home.hasstelegrambot.listener.handler.shopping;
 
-import com.home.hasstelegrambot.listener.AbstractUpdateListener;
+import com.home.hasstelegrambot.listener.handler.AbstractTextUpdateHandler;
+import com.home.hasstelegrambot.listener.handler.UpdateWrapper;
 import com.home.hasstelegrambot.service.MessageService;
 import com.home.hasstelegrambot.service.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
 
 @Component
-public class AddItemToShoppingListListener extends AbstractUpdateListener {
+public class AddItemToShoppingListHandler extends AbstractTextUpdateHandler {
 
     public static final String SHOPPING_LIST_ITEM_PREFIX = "-";
 
@@ -22,11 +21,13 @@ public class AddItemToShoppingListListener extends AbstractUpdateListener {
     private MessageService messageService;
 
     @Override
-    protected void handleText(Update update, String user, Message message, String text) {
-        if(!text.startsWith(SHOPPING_LIST_ITEM_PREFIX)) {
-            return;
-        }
+    public boolean isSupport(String text) {
+        return text.startsWith(SHOPPING_LIST_ITEM_PREFIX);
+    }
 
+    @Override
+    public void handle(UpdateWrapper wrapper) {
+        String text = wrapper.getTextForce();
         List<String> items = shoppingListService.addItems(text);
 
         StringBuilder response = new StringBuilder("Товары добавлены в список покупок: \n");
